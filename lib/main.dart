@@ -1,6 +1,7 @@
 import 'package:balanced_meal/firebase_options.dart';
 import 'package:balanced_meal/providers/providers.dart';
 import 'package:balanced_meal/routes/routes.dart';
+import 'package:balanced_meal/theme/theme.dart';
 import 'package:balanced_meal/utils/util_keys.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       scaffoldMessengerKey: scaffoldKey,
       title: 'Balanced Meal',
+      theme: AppTheme.theme,
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.router,
     );

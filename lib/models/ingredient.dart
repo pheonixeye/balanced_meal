@@ -7,12 +7,14 @@ class Ingredient extends Equatable {
   final String food_name;
   final int calories;
   final String image_url;
+  final int price;
 
   const Ingredient({
     required this.id,
     required this.food_name,
     required this.calories,
     required this.image_url,
+    this.price = 12,
   });
 
   Ingredient copyWith({
