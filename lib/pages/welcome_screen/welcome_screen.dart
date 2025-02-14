@@ -42,11 +42,20 @@ class WelcomeScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () {
-                  GoRouter.of(context).goNamed(AppRouter.details);
-                },
-                child: Text('Order Food'),
+              Row(
+                spacing: 24,
+                children: [
+                  const SizedBox(),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        GoRouter.of(context).goNamed(AppRouter.details);
+                      },
+                      child: Text('Order Food'),
+                    ),
+                  ),
+                  const SizedBox(),
+                ],
               ),
               SizedBox(height: 40),
             ],

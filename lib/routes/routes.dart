@@ -1,9 +1,9 @@
-import 'package:balanced_meal/api/ingredients_api/hx_ingredients.dart';
 import 'package:balanced_meal/pages/details_screen/details_screen.dart';
 import 'package:balanced_meal/pages/order_screen/order_screen.dart';
 import 'package:balanced_meal/pages/summary_screen/summary_screen.dart';
 import 'package:balanced_meal/pages/welcome_screen/welcome_screen.dart';
-import 'package:balanced_meal/providers/px_ingredients.dart';
+import 'package:balanced_meal/providers/px_order_details.dart';
+import 'package:balanced_meal/providers/px_user_details.dart';
 import 'package:balanced_meal/utils/util_keys.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -31,8 +31,11 @@ class AppRouter {
             path: details,
             name: details,
             builder: (context, state) {
-              return DetailsScreen(
-                key: state.pageKey,
+              return ChangeNotifierProvider(
+                create: (context) => PxUserDetails(),
+                child: DetailsScreen(
+                  key: state.pageKey,
+                ),
               );
             },
           ),
@@ -40,10 +43,15 @@ class AppRouter {
             path: order,
             name: order,
             builder: (context, state) {
-              return ChangeNotifierProvider(
-                create: (context) => PxIngredients(
-                  service: const HxIngredients(),
-                ),
+              return MultiProvider(
+                providers: [
+                  ChangeNotifierProvider.value(
+                    value: PxUserDetails(),
+                  ),
+                  ChangeNotifierProvider(
+                    create: (context) => PxOrderDetails(context),
+                  ),
+                ],
                 child: OrderScreen(
                   key: state.pageKey,
                 ),
@@ -54,8 +62,18 @@ class AppRouter {
             path: summary,
             name: summary,
             builder: (context, state) {
-              return SummaryScreen(
-                key: state.pageKey,
+              return MultiProvider(
+                providers: [
+                  ChangeNotifierProvider.value(
+                    value: PxUserDetails(),
+                  ),
+                  ChangeNotifierProvider.value(
+                    value: PxOrderDetails(context),
+                  ),
+                ],
+                child: SummaryScreen(
+                  key: state.pageKey,
+                ),
               );
             },
           ),

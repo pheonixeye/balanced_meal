@@ -1,5 +1,6 @@
 import 'package:balanced_meal/firebase_options.dart';
 import 'package:balanced_meal/providers/providers.dart';
+import 'package:balanced_meal/providers/px_ingredients.dart';
 import 'package:balanced_meal/routes/routes.dart';
 import 'package:balanced_meal/theme/theme.dart';
 import 'package:balanced_meal/utils/util_keys.dart';
@@ -33,12 +34,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      scaffoldMessengerKey: scaffoldKey,
-      title: 'Balanced Meal',
-      theme: AppTheme.theme,
-      debugShowCheckedModeBanner: false,
-      routerConfig: AppRouter.router,
+    return Consumer<PxIngredients>(
+      builder: (context, i, _) {
+        return MaterialApp.router(
+          scaffoldMessengerKey: scaffoldKey,
+          title: 'Balanced Meal',
+          theme: AppTheme.theme,
+          debugShowCheckedModeBanner: false,
+          routerConfig: AppRouter.router,
+        );
+      },
     );
   }
 }

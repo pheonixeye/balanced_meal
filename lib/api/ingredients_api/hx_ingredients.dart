@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:balanced_meal/api/common.dart';
 import 'package:balanced_meal/models/ingredient.dart';
 import 'package:balanced_meal/models/ingredients_response_model.dart';
@@ -15,13 +17,25 @@ class HxIngredients {
     final _vegetableResult = await HxCommon.db.collection(_vegetable).get();
 
     final carbs = _carbResult.docs
-        .map((e) => Ingredient.fromJson(e.id, e.data()))
+        .map((e) => Ingredient.fromJson(
+              e.id,
+              e.data(),
+              Random.secure().nextInt(10) + 10,
+            ))
         .toList();
     final meat = _meatResult.docs
-        .map((e) => Ingredient.fromJson(e.id, e.data()))
+        .map((e) => Ingredient.fromJson(
+              e.id,
+              e.data(),
+              Random.secure().nextInt(30) + 10,
+            ))
         .toList();
     final vegetables = _vegetableResult.docs
-        .map((e) => Ingredient.fromJson(e.id, e.data()))
+        .map((e) => Ingredient.fromJson(
+              e.id,
+              e.data(),
+              Random.secure().nextInt(5) + 10,
+            ))
         .toList();
 
     return IngredientsResponseModel(

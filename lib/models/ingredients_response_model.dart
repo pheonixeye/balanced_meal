@@ -8,11 +8,22 @@ class IngredientsResponseModel extends Equatable {
   final List<Ingredient> vegetables;
   final List<Ingredient> meat;
 
-  const IngredientsResponseModel({
+  late final List<Ingredient> _allIngredients;
+
+  IngredientsResponseModel({
     required this.carbs,
     required this.vegetables,
     required this.meat,
-  });
+  }) {
+    _allIngredients = [
+      ...carbs,
+      ...vegetables,
+      ...meat,
+    ];
+  }
+
+  List<Ingredient> get allIngredients => _allIngredients;
+
   @override
   bool? get stringify => true;
 

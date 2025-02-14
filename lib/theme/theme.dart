@@ -53,5 +53,12 @@ class AppTheme {
       ),
       floatingLabelBehavior: FloatingLabelBehavior.always,
     ),
+    appBarTheme: AppBarTheme(
+      titleTextStyle: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+      ),
+      centerTitle: true,
+    ),
   );
 }

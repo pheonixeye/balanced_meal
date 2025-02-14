@@ -40,12 +40,17 @@ class Ingredient extends Equatable {
     };
   }
 
-  factory Ingredient.fromJson(String id, Map<String, dynamic> map) {
+  factory Ingredient.fromJson(
+    String id,
+    Map<String, dynamic> map, [
+    int price = 12,
+  ]) {
     return Ingredient(
       id: id,
       food_name: map['food_name'] as String,
       calories: map['calories'] as int,
       image_url: map['image_url'] as String,
+      price: price,
     );
   }
 

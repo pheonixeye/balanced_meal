@@ -8,13 +8,13 @@ enum Gender {
   Female;
 }
 
-class DetailsModel extends Equatable {
+class UserDetails extends Equatable {
   final int height;
   final int weight;
   final int age;
   final Gender? gender;
 
-  const DetailsModel({
+  const UserDetails({
     required this.height,
     required this.weight,
     required this.age,
@@ -39,10 +39,10 @@ class DetailsModel extends Equatable {
     };
   }
 
-  double get calories => _calories();
+  int get calories => _calories().toInt();
 
-  factory DetailsModel.initial() {
-    return DetailsModel(
+  factory UserDetails.initial() {
+    return UserDetails(
       height: 0,
       weight: 0,
       age: 0,
@@ -50,13 +50,13 @@ class DetailsModel extends Equatable {
     );
   }
 
-  DetailsModel copyWith({
+  UserDetails copyWith({
     int? height,
     int? weight,
     int? age,
     Gender? gender,
   }) {
-    return DetailsModel(
+    return UserDetails(
       height: height ?? this.height,
       weight: weight ?? this.weight,
       age: age ?? this.age,
