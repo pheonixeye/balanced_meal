@@ -1,6 +1,7 @@
 import 'package:balanced_meal/models/user_details_model.dart';
 import 'package:balanced_meal/providers/px_user_details.dart';
 import 'package:balanced_meal/routes/routes.dart';
+import 'package:balanced_meal/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -60,31 +61,64 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ),
                             subtitle: DropdownButtonHideUnderline(
-                              child: DropdownButtonFormField<Gender>(
-                                //TODO: match figma design(dropdown items should not cover the button while open)
-                                items: [
-                                  ...Gender.values.map((e) {
-                                    return DropdownMenuItem<Gender>(
-                                      value: e,
-                                      child: Text(e.name),
+                              child: ButtonTheme(
+                                alignedDropdown: true,
+                                layoutBehavior:
+                                    ButtonBarLayoutBehavior.constrained,
+                                child: DropdownButtonFormField<Gender>(
+                                  //TODO: match figma design(dropdown items should not cover the button while open)
+                                  items: [
+                                    ...Gender.values.map((e) {
+                                      return DropdownMenuItem<Gender>(
+                                        value: e,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: d.detailsModel.gender == e
+                                                ? Color(0xffFFEDE3)
+                                                : null,
+                                          ),
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 16,
+                                            vertical: 12,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: Text(e.name),
+                                              ),
+                                              if (d.detailsModel.gender == e)
+                                                Icon(
+                                                  Icons.check,
+                                                  color: AppTheme.primaryColor,
+                                                ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    })
+                                  ],
+
+                                  selectedItemBuilder: (context) {
+                                    return Gender.values.map((e) {
+                                      return Text(e.name);
+                                    }).toList();
+                                  },
+                                  borderRadius: BorderRadius.circular(12),
+                                  validator: (value) {
+                                    if (value == null) {
+                                      return 'Invalid Input';
+                                    }
+                                    return null;
+                                  },
+                                  value: d.detailsModel.gender,
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  hint: Text('Choose Your Gender'),
+                                  onChanged: (val) {
+                                    d.updateDetailsModel(
+                                      gender: val,
                                     );
-                                  })
-                                ],
-                                borderRadius: BorderRadius.circular(12),
-                                validator: (value) {
-                                  if (value == null) {
-                                    return 'Invalid Input';
-                                  }
-                                  return null;
-                                },
-                                value: d.detailsModel.gender,
-                                icon: const Icon(Icons.keyboard_arrow_down),
-                                hint: Text('Choose Your Gender'),
-                                onChanged: (val) {
-                                  d.updateDetailsModel(
-                                    gender: val,
-                                  );
-                                },
+                                  },
+                                ),
                               ),
                             ),
                           ),
@@ -100,7 +134,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ),
                             subtitle: TextFormField(
-                              initialValue: d.detailsModel.weight.toString(),
+                              initialValue: d.detailsModel.weight == 0
+                                  ? null
+                                  : d.detailsModel.weight.toString(),
                               keyboardType: TextInputType.number,
                               onChanged: (value) {
                                 d.updateDetailsModel(
@@ -129,7 +165,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ),
                             subtitle: TextFormField(
-                              initialValue: d.detailsModel.height.toString(),
+                              initialValue: d.detailsModel.height == 0
+                                  ? null
+                                  : d.detailsModel.height.toString(),
                               keyboardType: TextInputType.number,
                               onChanged: (value) {
                                 d.updateDetailsModel(
@@ -158,7 +196,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ),
                             subtitle: TextFormField(
-                              initialValue: d.detailsModel.age.toString(),
+                              initialValue: d.detailsModel.age == 0
+                                  ? null
+                                  : d.detailsModel.age.toString(),
                               keyboardType: TextInputType.number,
                               inputFormatters: [
                                 FilteringTextInputFormatter.digitsOnly

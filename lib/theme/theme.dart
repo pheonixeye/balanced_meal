@@ -12,6 +12,7 @@ class AppTheme {
 
   static final theme = ThemeData(
     primaryColor: primaryColor,
+    scaffoldBackgroundColor: Color(0xffFBFBFB),
     textTheme: GoogleFonts.poppinsTextTheme(),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -33,6 +34,13 @@ class AppTheme {
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
+      fillColor: Color(0xffEAECF0),
+      filled: true,
+      hintStyle: GoogleFonts.questrial(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: Color(0xff959595),
+      ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(
@@ -54,9 +62,10 @@ class AppTheme {
       floatingLabelBehavior: FloatingLabelBehavior.always,
     ),
     appBarTheme: AppBarTheme(
-      titleTextStyle: TextStyle(
+      titleTextStyle: GoogleFonts.poppins(
         fontSize: 20,
         fontWeight: FontWeight.w500,
+        color: Color(0xff1E1E1E),
       ),
       centerTitle: true,
     ),
